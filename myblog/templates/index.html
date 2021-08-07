@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row" style="background: white;height: auto;margin-top: 2rem">
+    <div class="col-6 ml-3">
+
+        <div class=" col-md-4 col-sm-5 d-sm-inline d-none ">
+            {% if g.user %}
+            <h2><strong>{{ g.user["username"] }}</strong></h2>
+            <button class="btn btn-info"><a href="{{ url_for('api.logout') }}">خروج</a></button>
+            {% else %}
+            <button class="btn btn-primary">
+                <a href="{{ url_for('blog.login') }}" class="text-white">ورود</a>
+            </button>
+
+
+            <button class="btn btn-primary">
+                <a href="{{ url_for('blog.register') }}" class="text-white">ثبت نام</a>
+            </button>
+
+            <button class="btn ">
+                <i class="fa fa-search"></i>
+            </button>
+            {% endif %}
+
+        </div>
+
+
+    </div>
+    <div class="col-5 mr-3">
+        <div style="display: flex;justify-content: flex-end">
+            <button class="btn">
+                <h1><a href="{{ url_for('blog.home') }}" class="navbar-brand">بلاگ من</a></h1>
+            </button>
+        </div>
+
+
+    </div>
+
+</div>
+{% endblock %}

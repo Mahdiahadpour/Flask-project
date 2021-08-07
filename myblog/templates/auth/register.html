@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" action="{{ url_for('blog.register') }}" enctype="multipart/form-data">
+    <div class="container d-flex justify-content-center" style="direction: rtl">
+        <div>
+            <div class="row mt-4">
+                <input type="text" class="form-control data" name="username" placeholder="نام کاربری">
+            </div>
+            <div class="row mt-4 ">
+                <input type="password" class="form-control data" name="password" placeholder="رمز عبور">
+            </div>
+            <div class="row d-flex justify-content-center mt-4">
+                <div class="col-6">
+                    <input type="email" class="form-control data" name="mail" placeholder=" ایمیل(اختیاری)">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control data" name="phone" placeholder="شماره همراه">
+                </div>
+            </div>
+            <div class="row mt-2" style="border-radius: 10px;border:1px solid lightgray;height: 200px">
+                <div class="col-12 text-center">
+                    <h3 style="opacity: 0.5;margin-bottom: 2rem">عکس پروفایل خود را انتخاب کنید</h3>
+                </div>
+                <div class="col-12 text-center">
+                    <input id="image" name="image" type="file" class="btn rounded btn-secondary"
+                           style="align-items: center;width: 50%">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-4">
+
+                <button id="newUser" type="button" class="btn btn-info rounded ml-3" >ثبت نام</button>
+                <button type="button" class="btn btn-primary rounded text-white" >
+                    <a href="{{ url_for('blog.home') }}" class="text-white">بازگشت</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
