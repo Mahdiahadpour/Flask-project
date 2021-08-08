@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, session
 from flask import flash
 from flask import g
 from flask import redirect
@@ -51,8 +51,7 @@ def user_profile(user_id):
     return render_template('')
 
 
-
 @bp.route("/logout/")
 def logout():
-    return render_template('')
-
+    session.clear()
+    return redirect(url_for("blog.home"))

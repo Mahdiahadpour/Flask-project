@@ -26,10 +26,11 @@ def create_app(test_config=None):
 
 
     # apply the blueprints to the app
-    from myblog import blog,user
+    from myblog import blog,user,api
 
     app.register_blueprint(blog.bp)
     app.register_blueprint(user.bp)
+    app.register_blueprint(api.bp)
 
     app.add_url_rule("/", endpoint="home")
 

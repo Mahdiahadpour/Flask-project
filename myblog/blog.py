@@ -16,6 +16,7 @@ from myblog.db import get_db
 
 bp = Blueprint("blog", __name__)
 
+
 @bp.before_app_request
 def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
@@ -51,7 +52,9 @@ def home():
 
 @bp.route("/post/<post_id>/")
 def post(post_id):
-    return render_template('')
+    db = get_db()
+    post = db.posts.find({'_id':ObjectId(post_id)})
+    return render_template('post.html',post=post)
 
 
 
@@ -70,8 +73,14 @@ def tag(tag_id):
 def register():
 
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+
+        username = request.form.get("username")
+        password = request.form.get("password")
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        image = request.files.get('image')
+        if image != '':
+            image.save('myblog/static/media/uploads/'+secure_filename(image.filename))
         db = get_db()
         error = None
 
@@ -85,7 +94,8 @@ def register():
         if error is None:
             # the name is available, store it in the database and go to
             # the login page
-            user = {'username':username,'password':generate_password_hash(password)}
+            user = {'username':username,'password':generate_password_hash(password),
+                    'email':email,'phone':phone,'image':image.filename}
             db.user.insert_one(user)
             return redirect(url_for("blog.login"))
         else:

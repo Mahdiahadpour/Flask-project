@@ -8,7 +8,7 @@
 <form method="post" action="{{ url_for('blog.register') }}" enctype="multipart/form-data">
     <div class="d-flex justify-content-center mt-5" style="direction: rtl">
         <div class="console">
-            <div class="row mt-4 input" >
+            <div class="row mt-4 input">
                 <input type="text" class="form-control data" name="username" placeholder="نام کاربری">
             </div>
             <div class="row mt-4 input">
@@ -16,11 +16,11 @@
             </div>
             <div class="row mt-4 input">
 
-                    <input type="email" class="form-control data" name="mail" placeholder=" ایمیل(اختیاری)">
+                <input type="email" class="form-control data" name="email" placeholder=" ایمیل(اختیاری)">
             </div>
             <div class="row mt-4 input">
 
-                    <input type="text" class="form-control data" name="phone" placeholder="شماره همراه">
+                <input type="text" class="form-control data" name="phone" placeholder="شماره همراه">
             </div>
             <div class="row mt-4 input" style="border-radius: 10px;border:1px solid lightgray;height: 150px">
                 <div class="col-12 text-center">
@@ -33,8 +33,8 @@
             </div>
             <div class="row d-flex justify-content-center mt-4">
 
-                <button id="newUser" type="button" class="btn btn-info rounded ml-3" >ثبت نام</button>
-                <button type="button" class="btn btn-primary rounded text-white" >
+                <button id="newUser" type="submit" class="btn btn-info rounded ml-3">ثبت نام</button>
+                <button type="button" class="btn btn-primary rounded text-white">
                     <a href="{{ url_for('blog.home') }}" class="text-white">بازگشت</a>
                 </button>
             </div>
