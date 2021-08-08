@@ -4,7 +4,13 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/register.css') }}">
 {% endblock %}
 {% block content %}
+<div class="container-fluid">
+<div class="row">
+    <div class="col-12 header_register  text-center   text-white">
+        <h1>ایجاد حساب کاربری</h1>
 
+    </div>
+</div>
 <form method="post" action="{{ url_for('blog.register') }}" enctype="multipart/form-data">
     <div class="d-flex justify-content-center mt-5" style="direction: rtl">
         <div class="console">
@@ -27,7 +33,7 @@
                     <h5 style="opacity: 0.5;margin-bottom: 2rem">عکس پروفایل خود را انتخاب کنید</h5>
                 </div>
                 <div class="col-12 text-center">
-                    <input id="image" name="image" type="file" class="btn rounded btn-secondary"
+                    <input id="image" name="image" type="file" class="btn rounded "
                            style="align-items: center;width: 70%">
                 </div>
             </div>
@@ -35,12 +41,13 @@
 
                 <button id="newUser" type="submit" class="btn btn-info rounded ml-3">ثبت نام</button>
                 <button type="button" class="btn btn-primary rounded text-white">
-                    <a href="{{ url_for('blog.home') }}" class="text-white">بازگشت</a>
+                    <a href="{{ url_for('blog.home') }}" class="text-white text-decoration-none">بازگشت</a>
                 </button>
             </div>
         </div>
     </div>
 </form>
+    </div>
 
 {% endblock %}
 

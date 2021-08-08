@@ -104,7 +104,7 @@ def register():
     return render_template("auth/register.html")
 
 
-@bp.route("/login", methods=("GET", "POST"))
+@bp.route("/login/", methods=("GET", "POST"))
 def login():
     """Log in a registered user by adding the user id to the session."""
     if request.method == "POST":
