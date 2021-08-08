@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row border-bottom" style="background: white;height: auto;margin-top: 2rem">
+    <div class="col-6 ml-3">
+
+        <div class=" col-md-4 col-sm-5 d-sm-inline">
+            {% if g.user %}
+
+            <button class="btn btn-danger "><a class="text-white" href="{{ url_for('api.logout') }}">خروج</a></button>
+
+            <button class="btn ">
+                <i class="fa fa-search"></i>
+            </button>
+
+            {% else %}
+            <button class="btn btn-primary">
+                <a href="{{ url_for('blog.login') }}" class="text-white">ورود</a>
+            </button>
+
+
+            <button class="btn btn-primary">
+                <a href="{{ url_for('blog.register') }}" class="text-white">ثبت نام</a>
+            </button>
+
+            <button class="btn ">
+                <i class="fa fa-search"></i>
+            </button>
+            {% endif %}
+
+        </div>
+
+
+    </div>
+    <div class="col-5 mr-3">
+        <div style="display: flex;justify-content: flex-end">
+            <button class="btn ">
+                <h1><a href="{{ url_for('blog.home') }}" class="text-info">
+                    {% if g.user %}
+                    {{ g.user["username"] }} بلاگ
+                    {% else %}
+                    بلاگ من
+                    {% endif %}
+                </a></h1>
+            </button>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="container-fluid mt-5">
+    <div class="row" style="direction: rtl">
+        <div class="col-2">
+            <button class="btn">
+                <a href="{{ url_for('api.list_categorys') }}"> دسته بندی ها </a>
+            </button>
+        </div>
+
+        <div class="col-1">
+            <button class="btn">
+                <a href="{{ url_for('api.list_tags') }}"> تگ ها</a>
+            </button>
+        </div>
+
+    </div>
+
+
+</div>
+
+{% block posts %}
+<div class="container_fluid" >
+    <div id="posts" class="row " style="min-width: 100%">
+        {% if posts %}
+        {% for post in posts %}
+        <div class="col-4 bg-white">
+            <div class="card" style="height:100% ">
+                <div class="card-header">
+                    <img id='tour-img' class="rounded" src="{{ url_for('static', filename='media/uploads/' + post.image) }}" style="width:100%">
+                </div>
+                <div class="card-body">
+                    <h3>{{post.title}}</h3><br>
+                    <strong><p>{{ post.content[:30] }}</p></strong><br>
+                    <button class="btn btn-info" >
+                        <a class="text-white" href="{{ url_for('blog.post' + post.id )}}">بیشتر</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+
+    </div>
+
+
+</div>
+
+{% endblock %}
+{% endblock %}
+
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
