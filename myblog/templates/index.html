@@ -20,7 +20,7 @@
 
 
             <button class="btn btn-primary">
-                <a href="{{ url_for('blog.register') }}" class="text-white">ثبت نام</a>
+                <a  href="{{ url_for('blog.register') }}" class="text-white">ثبت نام</a>
             </button>
 
             <button class="btn ">
@@ -50,18 +50,19 @@
 
 </div>
 
-<div class="container-fluid mt-5">
-    <div class="row" style="direction: rtl">
-        <div class="col-2">
+<div class="container-fluid ">
+    <div class="row navbar " style="direction: rtl;width: 100vw;height: 5px;margin-top:0px">
+        <div class="col-12 nav-item bg-primary text-justify ">
+
             <button class="btn">
-                <a href="{{ url_for('api.list_categorys') }}"> دسته بندی ها </a>
+                <a href="{{ url_for('api.list_categorys') }}" class="text-white text-decoration-none"> دسته بندی ها </a>
+            </button>
+            <button class="btn">
+                <a href="{{ url_for('api.list_tags') }}" class="text-white text-decoration-none"> تگ ها</a>
             </button>
         </div>
 
-        <div class="col-1">
-            <button class="btn">
-                <a href="{{ url_for('api.list_tags') }}"> تگ ها</a>
-            </button>
+
         </div>
 
     </div>
