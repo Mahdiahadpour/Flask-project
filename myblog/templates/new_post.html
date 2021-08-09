@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" action="{{ url_for('user.create_post') }}" enctype="multipart/form-data">
+    <div class="d-flex justify-content-center mt-5" style="direction: rtl">
+        <div class="console">
+            <div class="row mt-4 input">
+                <input type="text" class="form-control data" name="title" placeholder="عنوان مطلب ">
+            </div>
+
+
+            <div class="row mt-4 input" style="height: 300px">
+                <input type="text" class="form-control data" name="content" placeholder="محتوای مطلب">
+            </div>
+            <div class="row mt-4 input">
+                <select name="category" id="categorys">
+                    {% for category in categorys%}
+                    <option value="{{ category.id }}">{{category.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row mt-4 input">
+
+
+                <select name="tag" id="tags">
+                    {% for tag in tags%}
+                    <option value="{{ tag.id }}">{{tag.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="row mt-4 input" style="border-radius: 10px;border:1px solid lightgray;height: 150px">
+                <div class="col-12 text-center">
+                    <h5 style="opacity: 0.5;margin-bottom: 2rem">تصویر برای پست خود بارگذاری کنید</h5>
+                </div>
+                <div class="col-12 text-center">
+                    <input id="image" name="image" type="file" class="btn rounded btn-secondary"
+                           style="align-items: center;width: 70%">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mt-4">
+
+                <button id="newUser" type="submit" class="btn btn-info rounded ml-3">ثبت</button>
+                <button type="button" class="btn btn-warning rounded text-white">
+                    <a href="{{ url_for('blog.home') }}" class="text-white">بازگشت</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

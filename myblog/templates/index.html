@@ -8,11 +8,13 @@
             {% if g.user %}
 
             <button class="btn btn-danger "><a class="text-white" href="{{ url_for('api.logout') }}">خروج</a></button>
-
+            <button class="btn btn-info "><a class="text-white" href="{{ url_for('user.create_post') }}">ایجاد پست</a>
+            </button>
             <button class="btn ">
                 <i class="fa fa-search"></i>
             </button>
-
+            <button class="btn btn-primary "><a class="text-white" href="{{ url_for('user.post_list') }}">پست های من</a>
+            </button>
             {% else %}
             <button class="btn btn-primary">
                 <a href="{{ url_for('blog.login') }}" class="text-white">ورود</a>
@@ -69,35 +71,18 @@
 
 </div>
 
-{% block posts %}
-<div class="container_fluid" >
-    <div id="posts" class="row " style="min-width: 100%">
-        {% if posts %}
-        {% for post in posts %}
-        <div class="col-4 bg-white">
-            <div class="card" style="height:100% ">
-                <div class="card-header">
-                    <img id='tour-img' class="rounded" src="{{ url_for('static', filename='media/uploads/' + post.image) }}" style="width:100%">
-                </div>
-                <div class="card-body">
-                    <h3>{{post.title}}</h3><br>
-                    <strong><p>{{ post.content[:30] }}</p></strong><br>
-                    <button class="btn btn-info" >
-                        <a class="text-white" href="{{ url_for('blog.post' + post.id )}}">بیشتر</a>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
-        {% endif %}
-
-    </div>
-
-
-</div>
-
+{% block newPost %}
 {% endblock %}
+
+
+{% block posts %}
+{% endblock %}
+
+
+{% block detail_post %}
+{% endblock %}
+
+
 {% endblock %}
 
 

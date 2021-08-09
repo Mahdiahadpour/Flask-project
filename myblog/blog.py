@@ -41,12 +41,23 @@ def login_required(view):
     return wrapped_view
 
 
+from bson import ObjectId
+import json
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o,ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self,o)
+
 
 
 @bp.route("/home")
 @bp.route("/")
 def home():
-    return render_template('index.html')
+    db = get_db()
+    posts = db.posts.find()
+    return render_template('all_posts.html', posts=list(posts))
 
 
 
@@ -54,7 +65,8 @@ def home():
 def post(post_id):
     db = get_db()
     post = db.posts.find({'_id':ObjectId(post_id)})
-    return render_template('post.html',post=post)
+    return render_template('detail_post.html',posts=list(post))
+
 
 
 
@@ -80,7 +92,7 @@ def register():
         phone = request.form.get('phone')
         image = request.files.get('image')
         if image != '':
-            image.save('myblog/static/media/uploads/'+secure_filename(image.filename))
+            image.save('myblog/static/media/uploads/profiles/'+secure_filename(image.filename))
         db = get_db()
         error = None
 
