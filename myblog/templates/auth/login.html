@@ -6,7 +6,7 @@
             <h1 class="text-white">ورود</h1>
         </div>
     </div>
-    <form method="post" action="{{ url_for('blog.login') }}" enctype="multipart/form-data">
+
 
         <form method="post" action="{{ url_for('blog.login') }}" enctype="multipart/form-data">
             <div class="container d-flex justify-content-center" style="direction: rtl">
@@ -32,16 +32,7 @@
         </form>
 </div>
 
-<div class="row d-flex justify-content-center mt-4">
 
-    <button id="newUser" type="submit" class="btn btn-info rounded ml-2">ورود</button>
-    <button type="button" class="btn btn-primary rounded text-white">
-                    <a href="{{ url_for('blog.home') }}" class="text-white">بازگشت</a>
-                </button>
-</div>
-</div>
-</div>
 
-</form>
 
 {% endblock %}
