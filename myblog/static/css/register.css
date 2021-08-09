@@ -1,0 +1,21 @@
+.input {
+    max-width: 400px;
+    box-shadow: #587b9c;
+}
+
+.header_register {
+    height: 150px;
+    background-image: url("../media/backgroud.jpg");
+}
+
+.header_register h1 {
+    margin-top: 50px;
+}
+
+.header_register h1:hover {
+    font-size: 50px;
+}
+
+button:hover {
+    width: 100px;
+}
