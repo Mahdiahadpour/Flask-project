@@ -1,5 +1,3 @@
-import json
-from bson import ObjectId
 import functools
 from flask import Blueprint, session
 from flask import flash
@@ -14,7 +12,6 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from bson.objectid import ObjectId
 from myblog.db import get_db
-
 
 bp = Blueprint("blog", __name__)
 
@@ -32,6 +29,7 @@ def load_logged_in_user():
 
 def login_required(view):
     """View decorator that redirects anonymous users to the login page."""
+
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
@@ -40,6 +38,10 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+from bson import ObjectId
+import json
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -76,7 +78,6 @@ def tag(tag_id):
 
 @bp.route("/register", methods=("GET", "POST"))
 def register():
-
     if request.method == "POST":
 
         username = request.form.get("username")
@@ -85,8 +86,7 @@ def register():
         phone = request.form.get('phone')
         image = request.files.get('image')
         if image != '':
-            image.save('myblog/static/media/uploads/profiles/' +
-                       secure_filename(image.filename))
+            image.save('myblog/static/media/uploads/profiles/' + secure_filename(image.filename))
         db = get_db()
         error = None
 
@@ -137,3 +137,10 @@ def login():
             flash(error)
 
     return render_template("auth/login.html")
+
+
+@bp.route('/user-posts/<user_id>/')
+def user_posts(user_id):
+    user = get_db().user.find({'_id': ObjectId(user_id)})
+    posts = get_db().posts.find({'user._id': user[0]['_id']})
+    return render_template('all_posts.html', posts=list(posts))

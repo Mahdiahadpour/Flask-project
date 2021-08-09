@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="row border-bottom" style="background: white;height: auto;margin-top: 2rem">
     <div class="col-6 ml-3">
@@ -10,10 +11,30 @@
             <button class="btn btn-danger "><a class="text-white" href="{{ url_for('api.logout') }}">خروج</a></button>
             <button class="btn btn-info "><a class="text-white" href="{{ url_for('user.create_post') }}">ایجاد پست</a>
             </button>
+
+            <button class="btn btn-primary "><a class="text-white" href="{{ url_for('user.post_list') }}">پست های من</a>
+            </button>
+
+            <button class="btn btn-primary " data-toggle="modal" data-target="#myProfile"><a class="text-white"
+                                                                                             href="{{ url_for('user.profile') }}">پروفایل
+                من</a>
+            </button>
+            <div class="modal" id="myProfile">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
             <button class="btn ">
                 <i class="fa fa-search"></i>
-            </button>
-            <button class="btn btn-primary "><a class="text-white" href="{{ url_for('user.post_list') }}">پست های من</a>
             </button>
             {% else %}
             <button class="btn btn-primary">

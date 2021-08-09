@@ -1,5 +1,3 @@
-from myblog.db import get_db
-from myblog.blog import login_required
 from bson import ObjectId
 from flask import Blueprint
 from flask import flash
@@ -11,9 +9,8 @@ from flask import url_for
 from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
 
-
-bp = Blueprint("user", __name__, url_prefix='/user')
-
+from myblog.blog import login_required
+from myblog.db import get_db
 
 bp = Blueprint("user", __name__, url_prefix='/user')
 
@@ -44,13 +41,12 @@ def create_post():
         status = True
 
         if image != '':
-            image.save('myblog/static/media/uploads/posts/' +
-                       secure_filename(image.filename))
+            image.save('myblog/static/media/uploads/posts/' + secure_filename(image.filename))
 
         post = db.user.find_one({"title": title})
         if post is None:
             db.posts.insert_one({'user': user, 'title': title, 'content': content,
-                                'category': category,
+                                 'category': category,
                                  'tag': tag, 'image': image.filename,
                                  'status': status, 'like': 0, 'dislike': 0})
 
