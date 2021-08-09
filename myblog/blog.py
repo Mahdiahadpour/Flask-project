@@ -1,3 +1,5 @@
+import json
+from bson import ObjectId
 import functools
 from flask import Blueprint, session
 from flask import flash
@@ -25,8 +27,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db().user.find_one({"_id":ObjectId(user_id)})
-
+        g.user = get_db().user.find_one({"_id": ObjectId(user_id)})
 
 
 def login_required(view):
@@ -41,21 +42,26 @@ def login_required(view):
     return wrapped_view
 
 
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
 
 
 @bp.route("/home")
 @bp.route("/")
 def home():
-    return render_template('index.html')
-
+    db = get_db()
+    posts = db.posts.find()
+    return render_template('all_posts.html', posts=list(posts))
 
 
 @bp.route("/post/<post_id>/")
 def post(post_id):
     db = get_db()
-    post = db.posts.find({'_id':ObjectId(post_id)})
-    return render_template('post.html',post=post)
-
+    post = db.posts.find({'_id': ObjectId(post_id)})
+    return render_template('detail_post.html', posts=list(post))
 
 
 @bp.route("/category-posts/<category_id>/")
@@ -66,7 +72,6 @@ def category(category_id):
 @bp.route("/tag-posts/<tag_id>")
 def tag(tag_id):
     return render_template('')
-
 
 
 @bp.route("/register", methods=("GET", "POST"))
@@ -80,7 +85,8 @@ def register():
         phone = request.form.get('phone')
         image = request.files.get('image')
         if image != '':
-            image.save('myblog/static/media/uploads/'+secure_filename(image.filename))
+            image.save('myblog/static/media/uploads/profiles/' +
+                       secure_filename(image.filename))
         db = get_db()
         error = None
 
@@ -88,14 +94,14 @@ def register():
             error = "Username is required."
         elif not password:
             error = "Password is required."
-        elif db.user.find_one({"username":username}) is not None :
+        elif db.user.find_one({"username": username}) is not None:
             error = f"User {username} is already registered."
 
         if error is None:
             # the name is available, store it in the database and go to
             # the login page
-            user = {'username':username,'password':generate_password_hash(password),
-                    'email':email,'phone':phone,'image':image.filename}
+            user = {'username': username, 'password': generate_password_hash(password),
+                    'email': email, 'phone': phone, 'image': image.filename}
             db.user.insert_one(user)
             return redirect(url_for("blog.login"))
         else:
@@ -104,7 +110,7 @@ def register():
     return render_template("auth/register.html")
 
 
-@bp.route("/login/", methods=("GET", "POST"))
+@bp.route("/login", methods=("GET", "POST"))
 def login():
     """Log in a registered user by adding the user id to the session."""
     if request.method == "POST":
@@ -114,7 +120,7 @@ def login():
         db = get_db()
         error = None
 
-        user = db.user.find_one({"username":username})
+        user = db.user.find_one({"username": username})
 
         if user is None:
             error = "Incorrect username."
@@ -131,4 +137,3 @@ def login():
             flash(error)
 
     return render_template("auth/login.html")
-

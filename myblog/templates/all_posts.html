@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block posts %}
+{% if posts %}
+<div class="container_fluid">
+    <div id="posts" class="row " style="min-width: 100%">
+        {% for post in posts %}
+        <div class="col-4 bg-white">
+            <div class="card" style="height:100% ">
+                <div class="card-header">
+                    <img  class="rounded"
+                         src="{{ url_for('static', filename='media/uploads/posts/' + post.image) }}" style="width:100%">
+                </div>
+                <div class="card-body">
+                    <h3>{{post.title}}</h3><br>
+                    <strong><p>{{ post.content[:50] }}...</p></strong><br>
+
+                    <button class="btn btn-info">
+
+                        <a class="text-white" href="{{ url_for('blog.post' ,post_id=post._id|string)}}">بیشتر</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+{% endif %}
+
+{% endblock %}
