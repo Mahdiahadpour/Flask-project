@@ -132,9 +132,10 @@ def login():
             session.clear()
             user['_id'] = str(user['_id'])
             session["user_id"] = user["_id"]
+            flash(f"عزیز،خوش امدید!{user['username']}","alert-success")
             return redirect(url_for("blog.home"))
         else:
-            flash(error)
+            flash("کاربر عزیز،نام کاربری یا رمز عبور اشتباه است.مجددا تلاش کنید","alert-danger")
 
     return render_template("auth/login.html")
 

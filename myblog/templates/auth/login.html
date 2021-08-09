@@ -6,6 +6,21 @@
             <h1 class="text-white">ورود</h1>
         </div>
     </div>
+    {% with massages= get_flashed_messages(with_categories=true)%}
+    {% if massages %}
+    {% for category,massage in massages %}
+    <div class="text-center text-dark alert {{ category }}">
+    {% if category=="info" %}
+        alert-info
+    {% elif category=="danger" %}
+        alert-danger
+    {% endif %}
+    {{ massage }}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
 
 
         <form method="post" action="{{ url_for('blog.login') }}" enctype="multipart/form-data">

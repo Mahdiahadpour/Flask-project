@@ -15,3 +15,10 @@ h1{
 h1:hover{
     font-size: 30px;
 }
+.alert{
+    width: 50%;
+    margin-top: 20px;
+    margin-left: 25%;
+    border-radius: 10px;
+}
+
