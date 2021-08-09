@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
 <div class="row border-bottom" style="background: white;height: auto;margin-top: 2rem">
     <div class="col-6 ml-3">
 
@@ -12,7 +14,8 @@
                 <i class="fa fa-search"></i>
             </button>
             <button class="btn btn-primary "><a class="text-white" href="{{ url_for('user.post_list') }}">پست های من</a>
-            </button> {% else %}
+            </button>
+            {% else %}
             <button class="btn btn-primary">
                 <a href="{{ url_for('blog.login') }}" class="text-white">ورود</a>
             </button>
@@ -24,7 +27,8 @@
 
             <button class="btn ">
                 <i class="fa fa-search"></i>
-            </button> {% endif %}
+            </button>
+            {% endif %}
 
         </div>
 
@@ -47,8 +51,8 @@
     </div>
 
 </div>
-
-<div class="container-fluid ">
+{% block navbar %}
+<div class="container-fluid mb-5">
     <div class="row navbar " style="direction: rtl;width: 100vw;height: 5px;margin-top:0px">
         <div class="col-12 nav-item bg-primary text-justify ">
 
@@ -64,10 +68,23 @@
     </div>
 
 </div>
+{% endblock %}
+
+{% block newPost %}
+{% endblock %}
 
 
-</div>
+{% block posts %}
+{% endblock %}
 
-{% block newPost %} {% endblock %} {% block posts %} {% endblock %} {% block detail_post %} {% endblock %} {% endblock %} {% block js %}
+
+{% block detail_post %}
+{% endblock %}
+
+
+{% endblock %}
+
+
+{% block js %}
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
