@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row border-bottom" style="background: white;height: auto;margin-top: 2rem">
+    <div class="col-6 ml-3">
+
+        <div class=" col-md-4 col-sm-5 d-sm-inline">
+            {% if g.user %}
+
+            <button class="btn btn-danger "><a class="text-white" href="{{ url_for('api.logout') }}">خروج</a></button>
+            <button class="btn btn-info "><a class="text-white" href="{{ url_for('user.create_post') }}">ایجاد پست</a>
+            </button>
+
+            <button class="btn btn-primary "><a class="text-white" href="{{ url_for('user.post_list') }}">پست های من</a>
+            </button>
+
+            <button class="btn btn-primary " data-toggle="modal" data-target="#myProfile"><a class="text-white"
+                                                                                             href="{{ url_for('user.profile') }}">پروفایل
+                من</a>
+            </button>
+            <div class="modal" id="myProfile">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="btn ">
+                <i class="fa fa-search"></i>
+            </button>
+            {% else %}
+            <button class="btn btn-primary">
+                <a href="{{ url_for('blog.login') }}" class="text-white">ورود</a>
+            </button>
+
+
+            <button class="btn btn-primary">
+                <a href="{{ url_for('blog.register') }}" class="text-white">ثبت نام</a>
+            </button>
+
+            <button class="btn ">
+                <i class="fa fa-search"></i>
+            </button>
+            {% endif %}
+
+        </div>
+
+
+    </div>
+    <div class="col-5 mr-3">
+        <div style="display: flex;justify-content: flex-end">
+            <button class="btn ">
+                <h1><a href="{{ url_for('blog.home') }}" class="text-info">
+                    {% if g.user %}
+                    {{ g.user["username"] }} بلاگ
+                    {% else %}
+                    بلاگ من
+                    {% endif %}
+                </a></h1>
+            </button>
+        </div>
+
+
+    </div>
+
+</div>
+{% block navbar %}
+<div class="container-fluid mb-5">
+    <div class="row navbar " style="direction: rtl;width: 100vw;height: 5px;margin-top:0px">
+        <div class="col-12 nav-item bg-primary text-justify ">
+
+            <button class="btn">
+                <a href="{{ url_for('api.list_categorys') }}" class="text-white text-decoration-none"> دسته بندی ها </a>
+            </button>
+            <button class="btn">
+                <a href="{{ url_for('api.list_tags') }}" class="text-white text-decoration-none"> تگ ها</a>
+            </button>
+        </div>
+
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block newPost %}
+{% endblock %}
+
+
+{% block posts %}
+{% endblock %}
+
+
+{% block detail_post %}
+{% endblock %}
+
+
+{% endblock %}
+
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/register.css') }}"> {% endblock %} {% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 header_register  text-center   text-white">
+            <h1>ایجاد حساب کاربری</h1>
+
+        </div>
+    </div>
+
+    <form method="post" action="{{ url_for('blog.register') }}" enctype="multipart/form-data">
+        <div class="d-flex justify-content-center mt-5" style="direction: rtl">
+            <div class="console">
+                <div class="row mt-4 input">
+                    <input type="text" class="form-control data" name="username" placeholder="نام کاربری">
+                </div>
+                <div class="row mt-4 input">
+                    <input type="password" class="form-control data" name="password" placeholder="رمز عبور">
+                </div>
+                <div class="row mt-4 input">
+
+                    <input type="email" class="form-control data" name="email" placeholder=" ایمیل(اختیاری)">
+                </div>
+                <div class="row mt-4 input">
+
+                    <input type="text" class="form-control data" name="phone" placeholder="شماره همراه">
+                </div>
+                <div class="row mt-4 input" style="border-radius: 10px;border:1px solid lightgray;height: 150px">
+                    <div class="col-12 text-center">
+                        <h5 style="opacity: 0.5;margin-bottom: 2rem">عکس پروفایل خود را انتخاب کنید</h5>
+                    </div>
+                    <div class="col-12 text-center">
+                        <input id="image" name="image" type="file" class="btn rounded btn-secondary" style="align-items: center;width: 70%">
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center mt-4 mb-4">
+
+                    <button id="newUser" type="submit" class="btn btn-info rounded ml-3">ثبت نام</button>
+                    <button type="button" class="btn btn-primary rounded text-white">
+                    <a href="{{ url_for('blog.home') }}" class="text-white text-decoration-none">بازگشت</a>
+                </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
